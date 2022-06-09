@@ -2,6 +2,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -12,16 +13,12 @@ public class loginTest {
         SoftAssert soft = new SoftAssert();
     loginPage login;
 
-//    public loginTest() throws Exception {
-//    }
+    @DataProvider(name = "TestData")
+    public Object[][] testData() throws Exception {
+        return Util.getDataFromExcel(Util.FILE_PATH, Util.SHEET_NAME,
+                Util.TABLE_NAME);
+    }
 
-    //    public void loginSteps(String username , String password){
-//        login.usernameElementPOM(driver).clear();
-//        login.usernameElementPOM(driver).sendKeys(username);
-//        login.passElementPOM(driver).sendKeys(password);
-//        login.passElementPOM(driver).sendKeys(Keys.ENTER);
-//
-//    }
         @BeforeTest
         void openBrowser() throws InterruptedException {
             String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
@@ -34,15 +31,15 @@ public class loginTest {
 
         }
 
-        @Test
-        void test() throws Exception {
+        @Test(dataProvider = "TestData")
+        void test(String uname,String pass) throws Exception {
             String [][]testData= Util.getDataFromExcel(Util.FILE_PATH,Util.SHEET_NAME,Util.TABLE_NAME);
+//
+//            for (int i = 0 ; i< testData.length;i++){
+//          login.loginSteps(testData[i][0], testData[i][1]);}
 
-            for (int i = 0 ; i< testData.length;i++){
-          login.loginSteps(testData[i][0], testData[i][1]);}
-
-
-
+           // login.loginSteps(testData[1][0], testData[1][1]);
+            login.loginSteps(uname,pass);
          //   String er ="You logged into a secure area!";
 
            // String ar = login.flashPOM().getText();

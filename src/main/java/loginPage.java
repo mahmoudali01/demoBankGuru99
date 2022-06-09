@@ -32,6 +32,7 @@ public class loginPage {
         usernameElementPOM().sendKeys(username);
 //        usernamePF.clear();
 //        usernamePF.sendKeys(username);
+        passElementPOM().clear();
         passElementPOM().sendKeys(password);
         passElementPOM().sendKeys(Keys.ENTER);
         driver.switchTo().alert().accept();
