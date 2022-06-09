@@ -35,7 +35,6 @@ public class loginPage {
         passElementPOM().clear();
         passElementPOM().sendKeys(password);
         passElementPOM().sendKeys(Keys.ENTER);
-        driver.switchTo().alert().accept();
 
 
     }
